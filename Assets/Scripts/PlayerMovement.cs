@@ -4,67 +4,61 @@ using PhysicsUtilities;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 5f;
-    [SerializeField] float acceleration = 1f;
-    [SerializeField] float maxSpeed = 7f;
+    [SerializeField] [Range(1f, 5f)] float movementSpeed = 5f;
+    [SerializeField] [Range(2f, 6f)] float jumpSpeed = 6f;
+    [SerializeField] [Range(30f, 60f)] float jumpAngle = 45f;
+    [SerializeField] [Range(10f, 30f)] float gravity = 20f;
+    
+    Coroutine jumpingRoutine;
+    float groundedY;
 
-    Coroutine obliqueMotionRoutine;
-    float horAcceleration = 0f;
-    float verAcceleration = 0f;
-    float initialHorSpeed = 0f;
-    float initialVerSpeed = 0f;
+    void Awake()
+    {
+        groundedY = transform.position.y;
+    }
 
     void Update()
     {
-        // Linear Motion Test
-
-        // Vector3 direction;
-        // float horInput = Input.GetAxisRaw("Horizontal");
-        // float verInput = Input.GetAxisRaw("Vertical");
-
-        // direction = new Vector3(horInput, verInput, 0f);
-
-        // PhysicalMovements.LinearMotion(transform, direction, movementSpeed);
-
-        // Linear Motion Test
-
-        // if (Input.GetAxisRaw("Horizontal") > 0f && horAcceleration != acceleration)
-        //     horAcceleration = acceleration;
-        // if (Input.GetAxisRaw("Horizontal") < 0f && horAcceleration != -acceleration)
-        //     horAcceleration = -acceleration;
-        // if (Input.GetAxisRaw("Vertical") > 0f && verAcceleration != acceleration)
-        //     verAcceleration = acceleration;
-        // if (Input.GetAxisRaw("Vertical") < 0f && verAcceleration != -acceleration)
-        //     verAcceleration = -acceleration;
-
-        // if (Input.GetKey(KeyCode.S))
-        // {
-        //     horAcceleration = 0f;
-        //     verAcceleration = 0f;
-        //     initialHorSpeed = 0f;
-        //     initialVerSpeed = 0f;
-        // }
-
-        // PhysicalMovements.ConstantAccelerationMotion(transform, AccelerationAxis.Horizontal, ref initialHorSpeed, horAcceleration, maxSpeed);
-        // PhysicalMovements.ConstantAccelerationMotion(transform, AccelerationAxis.Vertical, ref initialVerSpeed, verAcceleration, maxSpeed);
-
-        // Oblique Motion Test
-
-        if (Input.GetButtonDown("Fire1") && obliqueMotionRoutine == null)
-            obliqueMotionRoutine = StartCoroutine(PhysicalMovements.PerformObliqueMotion2D(transform, 
-                                                                                            Random.Range(10f, 15f), 
-                                                                                            Random.Range(0f, 180f), 
-                                                                                            Physics.gravity.y));
-        
-        if (Input.GetKey(KeyCode.R))
+        if (jumpingRoutine == null)
         {
-            if (obliqueMotionRoutine != null)
-            {
-                StopCoroutine(obliqueMotionRoutine);
-                obliqueMotionRoutine = null;
-            }
-            
-            transform.position = Vector3.zero;
+            float movement = Input.GetAxisRaw("Horizontal");
+            Vector3 movementDir = new Vector3(movement, 0f, 0f);
+
+            Move(movementDir);
+            if (Input.GetButtonDown("Jump")) 
+                Jump(movementDir);
         }
+        else
+            if (transform.position.y < groundedY)
+                Land();
+    }
+
+    void Move(Vector3 dir)
+    {
+        PhysicalMotions.Linear(transform, dir, movementSpeed);
+    }
+
+    void Jump(Vector3 dir)
+    {
+        float angle;
+
+        if (dir.x == 0f)
+            angle = 90f;
+        else
+        {
+            if (dir.x > 0f)
+                angle = jumpAngle;
+            else
+                angle = 180f - jumpAngle;
+        }
+
+        jumpingRoutine = StartCoroutine(PhysicalMotions.PerformObliqueShot2D(transform, jumpSpeed, angle, -gravity));
+    }
+
+    void Land()
+    {
+        StopCoroutine(jumpingRoutine);
+        jumpingRoutine = null;
+        transform.position = new Vector3(transform.position.x, groundedY, transform.position.z);
     }
 }
