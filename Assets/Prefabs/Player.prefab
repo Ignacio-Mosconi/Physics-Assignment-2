@@ -111,3 +111,7 @@ MonoBehaviour:
   movementSpeed: 5
   jumpSpeed: 10
   jumpAngle: 45
+  gravity: 20
+  trapLayer:
+    serializedVersion: 2
+    m_Bits: 1024

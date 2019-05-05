@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4827505120912361344}
   - component: {fileID: 4827505120912361349}
   - component: {fileID: 4827505120912361350}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Ball (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4827505121379928747}
   - component: {fileID: 4827505121379928744}
   - component: {fileID: 4827505121379928745}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 4827505121524089690}
   - component: {fileID: 4827505121524089695}
   - component: {fileID: 4827505121524089688}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Ball (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 4827505121592969798}
   - component: {fileID: 928510380142164767}
   - component: {fileID: 1272026975701984945}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 44bdc3f5814c7e1428d20b4023cbe056, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -423,7 +423,7 @@ GameObject:
   - component: {fileID: 4827505122102279023}
   - component: {fileID: 4827505122102279020}
   - component: {fileID: 4827505122102279021}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Ball (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

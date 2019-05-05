@@ -2,19 +2,24 @@
 using UnityEngine;
 using PhysicsUtilities;
 
+[RequireComponent(typeof(BoundingBox))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] [Range(1f, 5f)] float movementSpeed = 5f;
     [SerializeField] [Range(2f, 6f)] float jumpSpeed = 6f;
     [SerializeField] [Range(30f, 60f)] float jumpAngle = 45f;
     [SerializeField] [Range(10f, 30f)] float gravity = 20f;
+    [SerializeField] LayerMask trapLayer;
     
     Coroutine jumpingRoutine;
-    float groundedY;
+    Vector3 initialPosition;
 
     void Awake()
     {
-        groundedY = transform.position.y;
+        BoundingBox boundingBox = GetComponent<BoundingBox>();
+        boundingBox.OnTrigger.AddListener(OnCollisionTriggered);
+
+        initialPosition = transform.position;
     }
 
     void Update()
@@ -29,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
                 Jump(movementDir);
         }
         else
-            if (transform.position.y < groundedY)
+            if (transform.position.y < initialPosition.y)
                 Land();
     }
 
@@ -59,6 +64,16 @@ public class PlayerMovement : MonoBehaviour
     {
         StopCoroutine(jumpingRoutine);
         jumpingRoutine = null;
-        transform.position = new Vector3(transform.position.x, groundedY, transform.position.z);
+        transform.position = new Vector3(transform.position.x, initialPosition.y, transform.position.z);
+    }
+
+    void OnCollisionTriggered(CustomCollider2D collider)
+    {
+        if (LayerMask.GetMask(LayerMask.LayerToName(collider.gameObject.layer)) == trapLayer)
+        {
+            if (jumpingRoutine != null)
+                Land();
+            transform.position = initialPosition;
+        }
     }
 }
