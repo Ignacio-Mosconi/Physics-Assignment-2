@@ -412,6 +412,16 @@ MonoBehaviour:
   - 2
   - 3
   - 4
+  accelerations:
+  - 10
+  - 10
+  - 10
+  - 10
+  maxSpeeds:
+  - 720
+  - 720
+  - 720
+  - 720
 --- !u!1 &4827505122102279016
 GameObject:
   m_ObjectHideFlags: 0
