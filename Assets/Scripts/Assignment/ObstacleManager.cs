@@ -13,9 +13,9 @@ public class ObstacleManager : MonoBehaviour
     static ObstacleManager instance;
 
     [SerializeField] SpriteRenderer road;
-    [SerializeField] float treesSpeed;
-    [SerializeField] float minCarsSpeed;
-    [SerializeField] float maxCarsSpeed;
+    [SerializeField] [Range(1f, 3f)] float treesSpeed;
+    [SerializeField] [Range(1f, 2.5f)]float minCarsSpeed;
+    [SerializeField] [Range(2.5f, 5f)]float maxCarsSpeed;
 
     Dictionary<Boundary, float> roadBoundaries = new Dictionary<Boundary, float>();
     Dictionary<Boundary, float> viewBoundaries = new Dictionary<Boundary, float>();
