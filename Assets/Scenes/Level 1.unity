@@ -701,6 +701,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Car (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3916953659299833409, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -800,6 +805,9 @@ MonoBehaviour:
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 512
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &1447547540
 Transform:
   m_ObjectHideFlags: 0
@@ -902,6 +910,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Car (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916953659299833409, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
         type: 3}
@@ -1210,6 +1223,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Car (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916953659299833409, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
         type: 3}

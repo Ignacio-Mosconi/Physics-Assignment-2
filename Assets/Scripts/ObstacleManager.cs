@@ -17,6 +17,7 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] [Range(1f, 2.5f)] float minCarsSpeed = 1.5f;
     [SerializeField] [Range(2.5f, 5f)] float maxCarsSpeed = 3f;
     [SerializeField] LayerMask obstaclesLayerMask = default;
+    [SerializeField] LayerMask playerLayerMask = default;
 
     Dictionary<Boundary, float> roadBoundaries = new Dictionary<Boundary, float>();
     Dictionary<Boundary, float> viewBoundaries = new Dictionary<Boundary, float>();
@@ -108,5 +109,10 @@ public class ObstacleManager : MonoBehaviour
     public LayerMask ObstaclesLayerMask
     {
         get { return obstaclesLayerMask; }
+    }
+
+    public LayerMask PlayerLayerMask
+    {
+        get { return playerLayerMask; }
     }
 }

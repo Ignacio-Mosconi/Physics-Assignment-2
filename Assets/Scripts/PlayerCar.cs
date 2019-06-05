@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using PhysicsUtilities;
 
 [RequireComponent(typeof(BoundingBox))]
@@ -125,9 +125,6 @@ public class PlayerCar : MonoBehaviour
         LayerMask colliderLayerMask = LayerMask.GetMask(LayerMask.LayerToName(collider.gameObject.layer));
         
         if (colliderLayerMask == ObstacleManager.Instance.ObstaclesLayerMask)
-        {
             Respawn();
-            ObstacleManager.Instance.RespawnObstacle(collider.transform);
-        }
     }
 }
