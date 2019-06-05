@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5325391095963083284}
   - component: {fileID: 8962083030778974060}
+  - component: {fileID: 3379070696216614298}
   - component: {fileID: 8972921716337085828}
-  m_Layer: 0
-  m_Name: Car (1)
+  m_Layer: 9
+  m_Name: Enemy Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,6 +81,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3379070696216614298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916953659299833409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2089757224, guid: d46d8ccdbafb55d47b3d54649ec04d94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionEnabled: 1
+  isTrigger: 1
+  mass: 1
 --- !u!114 &8972921716337085828
 MonoBehaviour:
   m_ObjectHideFlags: 0
