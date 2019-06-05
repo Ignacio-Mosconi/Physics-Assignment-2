@@ -5,7 +5,7 @@ using PhysicsUtilities;
 public class PlayerCar : MonoBehaviour
 {
     [SerializeField] [Range(2f, 3f)] float wheelAcceleration = 2f;
-    [SerializeField] [Range(30f, 45f)] float maxWheelSpeed = 30f;
+    [SerializeField] [Range(20f, 40f)] float maxWheelSpeed = 30f;
     [SerializeField] [Range(0.5f, 1.5f)] float wheelRadius = 0.5f;
     [SerializeField] [Range(0.5f, 1f)] float frictionAcceleration = 0.5f;
 
@@ -23,8 +23,8 @@ public class PlayerCar : MonoBehaviour
     void Start()
     {
         initialPosition = transform.position;
-        wheelsAccels[0] = -frictionAcceleration;
-        wheelsAccels[1] = -frictionAcceleration;
+        wheelsAccels[0] = 0f;
+        wheelsAccels[1] = 0f;
     }
 
     void Update()
@@ -81,6 +81,11 @@ public class PlayerCar : MonoBehaviour
         PhysicalMotions.ConstantAccelerationCircular2D(wheelRadius, wheelsAccels[1], ref wheelsSpeeds[1], 
                                                         minRightWheelSpeed, maxRightWheelSpeed);
 
+        if (wheelsSpeeds[0] == 0f)
+            wheelsAccels[0] = 0f;
+        if (wheelsSpeeds[1] == 0f)
+            wheelsAccels[1] = 0f;
+
         float carSpeedLeft = wheelRadius * wheelsSpeeds[0];
         float carSpeedRight = wheelRadius * wheelsSpeeds[1];
 
@@ -108,14 +113,21 @@ public class PlayerCar : MonoBehaviour
         float newPosX = Mathf.Clamp(transform.position.x, leftBound, rightBound);
         float newPosY = Mathf.Clamp(transform.position.y, bottomBound, topBound);
 
-        transform.position = new Vector3(newPosX, newPosY, transform.position.z);            
+        transform.position = new Vector3(newPosX, newPosY, transform.position.z);
+
+        if (transform.position.x == leftBound || transform.position.x == rightBound ||
+            transform.position.y == topBound || transform.position.y == bottomBound)
+        {
+            wheelsAccels[0] = wheelsSpeeds[1] = 0f;
+            wheelsSpeeds[0] = wheelsSpeeds[1] = 0f;
+        }  
     }
 
     void Respawn()
     {
         transform.position = initialPosition;
-        wheelsAccels[0] = -frictionAcceleration;
-        wheelsAccels[1] = -frictionAcceleration;
+        wheelsAccels[0] = 0f;
+        wheelsAccels[1] = 0f;
         wheelsSpeeds[0] = 0f;
         wheelsSpeeds[1] = 0f;
     }

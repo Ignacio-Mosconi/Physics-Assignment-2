@@ -109,6 +109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelAcceleration: 3
-  maxWheelSpeed: 45
+  maxWheelSpeed: 30
   wheelRadius: 0.5
-  frictionAcceleration: 0.5
+  frictionAcceleration: 1
