@@ -2,16 +2,9 @@
 
 public class TreeObstacle : Obstacle
 {
-    SpriteRenderer spriteRenderer;
-
-    void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
     void Start()
     {
-        speed = ObstacleManager.Instance.TreesSpeed;
+        speed = ObstacleManager.Instance.ScenarySpeed;
     }
 
     public override void Respawn()

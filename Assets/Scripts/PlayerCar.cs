@@ -91,6 +91,8 @@ public class PlayerCar : MonoBehaviour
         PhysicalMotions.Linear(transform, carDirLeft, Mathf.Abs(carSpeedLeft));
         PhysicalMotions.Linear(transform, carDirRight, Mathf.Abs(carSpeedRight));
 
+        ObstacleManager.Instance.UpdateObstaclesSpeed(carSpeedLeft + carSpeedRight);
+
         ClampPosition();
     }
 

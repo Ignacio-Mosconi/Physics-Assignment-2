@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PhysicsUtilities;
 
 public enum Boundary
 {
@@ -13,15 +14,17 @@ public class ObstacleManager : MonoBehaviour
     static ObstacleManager instance;
 
     [SerializeField] SpriteRenderer road = default;
-    [SerializeField] [Range(1f, 3f)] float treesSpeed = 2f;
-    [SerializeField] [Range(1f, 2.5f)] float minCarsSpeed = 1.5f;
-    [SerializeField] [Range(2.5f, 5f)] float maxCarsSpeed = 3f;
+    [SerializeField] SpriteRenderer grassBackround = default;
+    [SerializeField] [Range(1f, 3f)] float scenarySpeed = 2f;
+    [SerializeField] [Range(3f, 4f)] float minCarsSpeed = 3.5f;
+    [SerializeField] [Range(4f, 5f)] float maxCarsSpeed = 4.5f;
     [SerializeField] LayerMask obstaclesLayerMask = default;
     [SerializeField] LayerMask playerLayerMask = default;
 
     Dictionary<Boundary, float> roadBoundaries = new Dictionary<Boundary, float>();
     Dictionary<Boundary, float> viewBoundaries = new Dictionary<Boundary, float>();
     Obstacle[] obstacles;
+    float currentScenarySpeed;
 
     void Awake()
     {
@@ -48,17 +51,34 @@ public class ObstacleManager : MonoBehaviour
         viewBoundaries.Add(Boundary.Top, cam.ViewportToWorldPoint(rightUpperCorner).y);
         viewBoundaries.Add(Boundary.Bottom, cam.ViewportToWorldPoint(leftLowerCorner).y);
 
+        currentScenarySpeed = scenarySpeed;
+
         obstacles = GetComponentsInChildren<Obstacle>();
     }
 
     void Update()
     {
+        PhysicalMotions.Linear(road.transform, -road.transform.up, currentScenarySpeed);
+        PhysicalMotions.Linear(grassBackround.transform, -grassBackround.transform.up, currentScenarySpeed);
+
+        if (road.transform.position.y <= viewBoundaries[Boundary.Bottom])
+            road.transform.position = new Vector3(0f, viewBoundaries[Boundary.Top], 0f);
+        if (grassBackround.transform.position.y <= viewBoundaries[Boundary.Bottom])
+            grassBackround.transform.position = new Vector3(0f, viewBoundaries[Boundary.Top], 0f);
+
         foreach (Obstacle obstacle in obstacles)
         {
             obstacle.Move();
-            if (obstacle.transform.position.y < viewBoundaries[Boundary.Bottom])
+            if (obstacle.transform.position.y + obstacle.Height * 0.5f < viewBoundaries[Boundary.Bottom] * 2f)
                 obstacle.Respawn();
         }
+    }
+
+    public void UpdateObstaclesSpeed(float playerSpeed)
+    {
+        currentScenarySpeed = scenarySpeed + playerSpeed;
+        foreach (Obstacle obstacle in obstacles)
+            obstacle.UpdateCurrentSpeed(playerSpeed);
     }
 
     public void RespawnObstacle(Transform obstacleTransform)
@@ -83,9 +103,9 @@ public class ObstacleManager : MonoBehaviour
         return (UnityEngine.Random.Range(minCarsSpeed, maxCarsSpeed));
     }
 
-    public float TreesSpeed
+    public float ScenarySpeed
     {
-        get { return treesSpeed; }
+        get { return scenarySpeed; }
     }
 
     public static ObstacleManager Instance

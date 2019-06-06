@@ -6,8 +6,10 @@ public class EnemyCar : Obstacle
 {
     BoundingBox boundingBox;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         boundingBox = GetComponent<BoundingBox>();
         boundingBox.OnTrigger.AddListener(OnTriggerCollisionDetected);
     }

@@ -476,8 +476,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 6.4, y: 10.8}
+  m_DrawMode: 2
+  m_Size: {x: 6.4, y: 32.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -593,8 +593,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 19.2, y: 10.8}
+  m_DrawMode: 2
+  m_Size: {x: 19.2, y: 32.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -761,6 +761,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511dc9e6c1e86904ea3dc1257506c0cc, type: 3}
 --- !u!4 &1328439257 stripped
@@ -799,9 +809,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   road: {fileID: 870367342}
-  treesSpeed: 2
-  minCarsSpeed: 2
-  maxCarsSpeed: 4
+  grassBackround: {fileID: 1162961856}
+  scenarySpeed: 3
+  minCarsSpeed: 3
+  maxCarsSpeed: 4.5
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -970,6 +981,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511dc9e6c1e86904ea3dc1257506c0cc, type: 3}
@@ -1283,6 +1304,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325391095963083284, guid: 511dc9e6c1e86904ea3dc1257506c0cc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511dc9e6c1e86904ea3dc1257506c0cc, type: 3}
