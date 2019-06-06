@@ -7,7 +7,7 @@ public class PlayerCar : MonoBehaviour
     [SerializeField] [Range(2f, 3f)] float wheelAcceleration = 2f;
     [SerializeField] [Range(20f, 40f)] float maxWheelSpeed = 30f;
     [SerializeField] [Range(0.5f, 1.5f)] float wheelRadius = 0.5f;
-    [SerializeField] [Range(0.5f, 1f)] float frictionAcceleration = 0.5f;
+    [SerializeField] [Range(0.1f, 1f)] float frictionAcceleration = 0.5f;
 
     BoundingBox boundingBox;
     Vector3 initialPosition;
@@ -42,10 +42,8 @@ public class PlayerCar : MonoBehaviour
                     wheelsAccels[0] = wheelAcceleration;
                     break;
                 default:
-                    if (wheelsAccels[0] > 0f)
-                        wheelsAccels[0] = -frictionAcceleration;
-                    else
-                        wheelsAccels[0] = frictionAcceleration;
+                    if (wheelsSpeeds[0] != 0f)
+                        wheelsAccels[0] = (wheelsSpeeds[0] > 0f) ? -frictionAcceleration : frictionAcceleration;
                 break;
             }
         }
@@ -63,10 +61,8 @@ public class PlayerCar : MonoBehaviour
                     wheelsAccels[1] = wheelAcceleration;
                     break;
                 default:
-                    if (wheelsAccels[1] > 0f)
-                        wheelsAccels[1] = -frictionAcceleration;
-                    else
-                        wheelsAccels[1] = frictionAcceleration;
+                    if (wheelsSpeeds[1] != 0f)
+                        wheelsAccels[1] = (wheelsSpeeds[1] > 0f) ? -frictionAcceleration : frictionAcceleration;
                 break;
             }
         }
@@ -110,15 +106,15 @@ public class PlayerCar : MonoBehaviour
         float topBound = obstacleManager.GetRoadBound(Boundary.Top) - halfBBHeight;
         float bottomBound = obstacleManager.GetRoadBound(Boundary.Bottom) + halfBBHeight;
 
-        float newPosX = Mathf.Clamp(transform.position.x, leftBound, rightBound);
-        float newPosY = Mathf.Clamp(transform.position.y, bottomBound, topBound);
-
-        transform.position = new Vector3(newPosX, newPosY, transform.position.z);
-
-        if (transform.position.x == leftBound || transform.position.x == rightBound ||
-            transform.position.y == topBound || transform.position.y == bottomBound)
+        if (transform.position.x < leftBound || transform.position.x > rightBound ||
+            transform.position.y > topBound || transform.position.y < bottomBound)
         {
-            wheelsAccels[0] = wheelsSpeeds[1] = 0f;
+            float newPosX = Mathf.Clamp(transform.position.x, leftBound, rightBound);
+            float newPosY = Mathf.Clamp(transform.position.y, bottomBound, topBound);
+
+            transform.position = new Vector3(newPosX, newPosY, transform.position.z);
+
+            wheelsAccels[0] = wheelsAccels[1] = 0f;
             wheelsSpeeds[0] = wheelsSpeeds[1] = 0f;
         }  
     }
